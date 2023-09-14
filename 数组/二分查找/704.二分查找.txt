@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int left=0,right=nums.size()-1;
+        
+        int mid=(left+right)>>1;
+
+        //在二分查找的过程中最重要的就是 区间不变性 想好是左闭右开 还是左闭右闭
+
+        //这里是左闭右闭的版本
+        while (left<=right)  //因为left==right 是有意义的
+        {
+              if (nums[mid]==target)
+                   return mid;
+              else if (nums[mid]<target)  //这里实际上是[left,mid]都小于目标
+                   left=mid+1;
+              else                        //这里实际上是[left,mid]都大于目标
+                  right=mid-1;
+              mid=(left+right)>>1;        //修改新mid
+        }
+        return -1;
+    }
+};
